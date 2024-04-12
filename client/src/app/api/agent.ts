@@ -2,12 +2,15 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import { toast } from "react-toastify";
 import { router } from "../router/Routes";
 
+const sleep = () => new Promise((resolve) => setTimeout(resolve, 1000));
+
 axios.defaults.baseURL = "http://localhost:5000/api/";
 
 const responseBody = (response: AxiosResponse) => response.data;
 
 axios.interceptors.response.use(
-  (response) => {
+  async (response) => {
+    await sleep();
     return response;
   },
   (error: AxiosError) => {
@@ -30,7 +33,7 @@ axios.interceptors.response.use(
         toast.error(data.title);
         break;
       case 404:
-        toast.error(data.title);
+        router.navigate("/not-found", { state: { error: data } });
         break;
       case 405:
         toast.error(data.title);

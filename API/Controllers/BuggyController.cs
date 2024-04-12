@@ -12,13 +12,9 @@ namespace API.Controllers
             return NotFound();
         }
         [HttpGet("badrequest")]
-        public ActionResult<string> GeBadRequest()
+        public ActionResult<string> GetBadRequest()
         {
-            return BadRequest(new ProblemDetails()
-            {
-                Status = 400,
-                Title = "This is a bad request"
-            });
+            return BadRequest();
         }
 
         [HttpGet("unauthorized")]
@@ -42,4 +38,4 @@ namespace API.Controllers
             return ValidationProblem();
         }
     }
-}
+}evet

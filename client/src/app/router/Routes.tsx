@@ -3,7 +3,7 @@ import App from "../layout/App";
 import HomePage from "../../features/home/HomePage";
 import AboutPage from "../../features/about/AboutPage";
 import ContactPage from "../../features/contact/ContactPage";
-import Catalog from "../../features/catalog/catalog";
+import Catalog from "../../features/catalog/Catalog";
 import ProductDetails from "../../features/catalog/ProductDetails";
 
 export const router = createBrowserRouter([

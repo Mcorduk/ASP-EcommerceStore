@@ -8,14 +8,39 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-import { Product } from "../../product";
+import { Product } from "../../app/models/product";
 import { Link } from "react-router-dom";
+import agent from "../../app/api/agent";
+import { LoadingButton } from "@mui/lab";
+import { useState } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useStoreContext } from "../../app/context/StoreContext";
 
 interface PropsType {
   product: Product;
 }
 
 export default function ProductCard({ product }: PropsType) {
+  const [loading, setLoading] = useState(false);
+  const { setCart } = useStoreContext();
+
+  function handleAddItem(productId: number) {
+    setLoading(true);
+    agent.Cart.addItem(productId)
+      .then((response) => {
+        setCart(response.value);
+      })
+      .then(() => {
+        toast.success("Item added to cart successfully!", { autoClose: 3000 });
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error("Failed to add item to cart.", { autoClose: 4000 });
+      })
+      .finally(() => setLoading(false));
+  }
+
   return (
     <Card>
       <CardHeader
@@ -48,7 +73,13 @@ export default function ProductCard({ product }: PropsType) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Add to Cart</Button>
+        <LoadingButton
+          loading={loading}
+          onClick={() => handleAddItem(product.id)}
+          size="small"
+        >
+          Add to Cart
+        </LoadingButton>
         <Button component={Link} to={`/catalog/${product.id}`} size="small">
           {" "}
           View{" "}

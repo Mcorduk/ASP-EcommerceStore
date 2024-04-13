@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Product } from "../../product";
+import { Product } from "../../app/models/product";
 import {
   Divider,
   Grid,

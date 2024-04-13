@@ -10,6 +10,7 @@ import {
 import Brightness4Icon from "@mui/icons-material/Brightness4"; // Import the missing Brightness4Icon component
 import { NavLink } from "react-router-dom";
 import { ShoppingCart } from "@mui/icons-material";
+import { useStoreContext } from "../context/StoreContext";
 
 const midLinks = [
   { title: "Home", path: "/" },
@@ -39,6 +40,9 @@ interface PropsType {
 }
 
 export default function Header({ toggleDarkMode }: PropsType) {
+  const { cart } = useStoreContext();
+  const itemCount = cart?.items.reduce((sum, item) => sum + item.quantity, 0);
+
   return (
     <AppBar position="static" sx={{ mb: 4 }}>
       <Toolbar
@@ -72,12 +76,18 @@ export default function Header({ toggleDarkMode }: PropsType) {
         </List>
 
         <Box display="flex" alignItems="center">
-          <IconButton size="large" edge="start" color="inherit" sx={{ mr: 2 }}>
-            <Badge badgeContent="4" color="secondary">
-              {/* Add the missing ShoppingCartIcon component */}
-              <ShoppingCart />
-            </Badge>
-          </IconButton>
+          <Link sx={{ color: "inherit", ml: 2 }} component={NavLink} to="/cart">
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              sx={{ mr: 2 }}
+            >
+              <Badge badgeContent={itemCount} color="secondary">
+                <ShoppingCart />
+              </Badge>
+            </IconButton>
+          </Link>
 
           <List sx={{ display: "flex" }}>
             {rightLinks.map(({ title, path }) => (

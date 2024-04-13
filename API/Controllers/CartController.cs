@@ -68,7 +68,7 @@ namespace API.Controllers
 
             await _context.SaveChangesAsync();
 
-            return Ok(cart);
+            return Ok();
         }
 
         /* Helper Methods */

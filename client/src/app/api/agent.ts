@@ -5,6 +5,7 @@ import { router } from "../router/Routes";
 const sleep = () => new Promise((resolve) => setTimeout(resolve, 1000));
 
 axios.defaults.baseURL = "http://localhost:5000/api/";
+axios.defaults.withCredentials = true;
 
 const responseBody = (response: AxiosResponse) => response.data;
 
@@ -68,9 +69,18 @@ const TestErrors = {
   getValidationError: () => requests.post("buggy/validationerror", {}),
 };
 
+const Cart = {
+  get: () => requests.get("cart"),
+  addItem: (productId: number, quantity = 1) =>
+    requests.post(`cart?productId=${productId}&quantity=${quantity}`, {}),
+  removeItem: (productId: number, quantity: number) =>
+    requests.del(`cart?productId=${productId}&quantity=${quantity}`),
+};
+
 const agent = {
   Catalog,
   TestErrors,
+  Cart,
 };
 
 export default agent;

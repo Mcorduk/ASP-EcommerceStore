@@ -15,7 +15,8 @@ import { LoadingButton } from "@mui/lab";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useStoreContext } from "../../app/context/StoreContext";
+import { useAppDispatch } from "../../app/store/configureStore";
+import { setCart } from "../cart/cartSlice";
 
 interface PropsType {
   product: Product;
@@ -23,13 +24,13 @@ interface PropsType {
 
 export default function ProductCard({ product }: PropsType) {
   const [loading, setLoading] = useState(false);
-  const { setCart } = useStoreContext();
+  const dispatch = useAppDispatch();
 
   function handleAddItem(productId: number) {
     setLoading(true);
     agent.Cart.addItem(productId)
       .then((response) => {
-        setCart(response.value);
+        dispatch(setCart(response.value));
       })
       .then(() => {
         toast.success("Item added to cart successfully!", { autoClose: 3000 });
@@ -88,3 +89,5 @@ export default function ProductCard({ product }: PropsType) {
     </Card>
   );
 }
+
+

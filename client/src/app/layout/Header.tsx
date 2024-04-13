@@ -10,7 +10,7 @@ import {
 import Brightness4Icon from "@mui/icons-material/Brightness4"; // Import the missing Brightness4Icon component
 import { NavLink } from "react-router-dom";
 import { ShoppingCart } from "@mui/icons-material";
-import { useStoreContext } from "../context/StoreContext";
+import { useAppSelector } from "../store/configureStore";
 
 const midLinks = [
   { title: "Home", path: "/" },
@@ -40,7 +40,7 @@ interface PropsType {
 }
 
 export default function Header({ toggleDarkMode }: PropsType) {
-  const { cart } = useStoreContext();
+  const { cart } = useAppSelector((state) => state.cart);
   const itemCount = cart?.items.reduce((sum, item) => sum + item.quantity, 0);
 
   return (

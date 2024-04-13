@@ -21,25 +21,28 @@ import { Link } from "react-router-dom";
 
 export default function CartPage() {
   const { cart, setCart, removeItem } = useStoreContext();
-  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState({
+    loading: false,
+    name: "",
+  });
 
-  function handleAddItem(productId: number) {
-    setLoading(true);
+  function handleAddItem(productId: number, name: string) {
+    setStatus({ loading: true, name });
     agent.Cart.addItem(productId)
       .then((response) => {
         setCart(response.value);
       })
       .catch((error) => console.log(error))
-      .finally(() => setLoading(false));
+      .finally(() => setStatus({ loading: false, name: "" }));
   }
 
-  function handleRemoveItem(productId: number, quantity = 1) {
-    setLoading(true);
+  function handleRemoveItem(productId: number, quantity = 1, name: string) {
+    setStatus({ loading: true, name });
 
     agent.Cart.removeItem(productId, quantity)
       .then(() => removeItem(productId, quantity))
       .catch((error) => console.log(error))
-      .finally(() => setLoading(false));
+      .finally(() => setStatus({ loading: false, name: "" }));
   }
 
   if (!cart) return <Typography variant="h3">Your cart is empty</Typography>;
@@ -79,15 +82,27 @@ export default function CartPage() {
                 <TableCell align="center">
                   <LoadingButton
                     color="error"
-                    loading={loading}
-                    onClick={() => handleRemoveItem(item.productId)}
+                    loading={
+                      status.loading && status.name === "rem" + item.productId
+                    }
+                    onClick={() =>
+                      handleRemoveItem(
+                        item.productId,
+                        1,
+                        "rem" + item.productId
+                      )
+                    }
                   >
                     <Remove />
                   </LoadingButton>
                   {item.quantity}
                   <LoadingButton
-                    loading={loading}
-                    onClick={() => handleAddItem(item.productId)}
+                    loading={
+                      status.loading && status.name === "add" + item.productId
+                    }
+                    onClick={() =>
+                      handleAddItem(item.productId, "add" + item.productId)
+                    }
                     color="secondary"
                   >
                     <Add />
@@ -98,9 +113,15 @@ export default function CartPage() {
                 </TableCell>
                 <TableCell align="right">
                   <LoadingButton
-                    loading={loading}
+                    loading={
+                      status.loading && status.name === "del" + item.productId
+                    }
                     onClick={() =>
-                      handleRemoveItem(item.productId, item.quantity)
+                      handleRemoveItem(
+                        item.productId,
+                        item.quantity,
+                        "del" + item.productId
+                      )
                     }
                     color="error"
                   >

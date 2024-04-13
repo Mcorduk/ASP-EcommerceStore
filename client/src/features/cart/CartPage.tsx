@@ -18,6 +18,7 @@ import { useState } from "react";
 import { LoadingButton } from "@mui/lab";
 // import CartSummary from "./CartSummary";
 import { Link } from "react-router-dom";
+import CartSummary from "./CartSummary";
 
 export default function CartPage() {
   const { cart, setCart, removeItem } = useStoreContext();
@@ -136,7 +137,7 @@ export default function CartPage() {
       <Grid container>
         <Grid item xs={6}></Grid>
         <Grid item xs={6}>
-          {/* <CartSummary /> */}
+          <CartSummary />
           <Button
             component={Link}
             to={"/checkout"}

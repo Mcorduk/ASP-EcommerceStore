@@ -45,7 +45,7 @@ namespace API.Controllers
 
             var CartDTO = MapCartToDTO(cart);
 
-            return CreatedAtRoute("GetBasket", CartDTO);
+            return CreatedAtRoute("GetCart", CartDTO);
         }
 
         [HttpDelete]
@@ -70,6 +70,8 @@ namespace API.Controllers
 
             return Ok(cart);
         }
+
+        /* Helper Methods */
 
         private async Task<Cart> RetrieveCart()
         {

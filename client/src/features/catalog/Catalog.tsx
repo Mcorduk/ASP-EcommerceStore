@@ -1,4 +1,3 @@
-import LoadingComponent from "../../app/layout/LoadingComponent";
 import { useAppDispatch, useAppSelector } from "../../app/store/configureStore";
 import ProductList from "./ProductList";
 import { useEffect } from "react";
@@ -7,19 +6,14 @@ import {
   fetchProductsAsync,
   productSelectors,
   setProductParams,
+  setPageNumber,
 } from "./catalogSlice";
-import {
-  Box,
-  FormGroup,
-  Grid,
-  Pagination,
-  Paper,
-  Typography,
-} from "@mui/material";
+import { FormGroup, Grid, Paper } from "@mui/material";
 import ProductSearch from "./ProductSearch";
 import RadioButtonGroup from "../../app/components/RadioButtonGroup";
 import CheckboxButtons from "../../app/components/CheckboxButtons";
 import AppPagination from "../../app/components/AppPagination";
+import LoadingComponent from "../../app/layout/LoadingComponent";
 
 const sortOptions = [
   { value: "name", label: "Alphabetical" },
@@ -32,7 +26,6 @@ export default function Catalog() {
   const dispatch = useAppDispatch();
   const {
     productsLoaded,
-    status,
     filtersLoaded,
     brands,
     types,
@@ -52,8 +45,7 @@ export default function Catalog() {
     }
   }, [filtersLoaded, dispatch]);
 
-  if (status.includes("pending") || !metaData)
-    return <LoadingComponent message="Loading products..." />;
+  if (!filtersLoaded)   return <LoadingComponent message="Loading products..." />;
 
   return (
     <Grid container columnSpacing={4}>
@@ -100,12 +92,14 @@ export default function Catalog() {
 
       <Grid item xs={3} />
       <Grid item xs={9}>
-        <AppPagination
-          metaData={metaData}
-          onPageChange={(page: number) =>
-            dispatch(setProductParams({ pageNumber: page }))
-          }
-        />
+        {metaData && (
+          <AppPagination
+            metaData={metaData}
+            onPageChange={(page: number) =>
+              dispatch(setPageNumber({ pageNumber: page }))
+            }
+          />
+        )}
       </Grid>
     </Grid>
   );

@@ -3,6 +3,7 @@ using API.Entities;
 using API.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace API.Controllers
 {
@@ -31,7 +32,7 @@ namespace API.Controllers
         {
             var product = await _context.Products.FindAsync(productId);
 
-            if (product == null) return NotFound();
+            if (product == null) return BadRequest(new ProblemDetails { Title = "Product not found" });
 
             var cart = await RetrieveCart();
 

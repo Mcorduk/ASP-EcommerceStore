@@ -10,37 +10,19 @@ import {
 } from "@mui/material";
 import { Product } from "../../app/models/product";
 import { Link } from "react-router-dom";
-import agent from "../../app/api/agent";
 import { LoadingButton } from "@mui/lab";
-import { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useAppDispatch } from "../../app/store/configureStore";
-import { setCart } from "../cart/cartSlice";
+import { useAppDispatch, useAppSelector } from "../../app/store/configureStore";
+import { addCartItemAsync } from "../cart/cartSlice";
 
 interface PropsType {
   product: Product;
 }
 
 export default function ProductCard({ product }: PropsType) {
-  const [loading, setLoading] = useState(false);
+  const { status } = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
-
-  function handleAddItem(productId: number) {
-    setLoading(true);
-    agent.Cart.addItem(productId)
-      .then((response) => {
-        dispatch(setCart(response.value));
-      })
-      .then(() => {
-        toast.success("Item added to cart successfully!", { autoClose: 3000 });
-      })
-      .catch((error) => {
-        console.log(error);
-        toast.error("Failed to add item to cart.", { autoClose: 4000 });
-      })
-      .finally(() => setLoading(false));
-  }
 
   return (
     <Card>
@@ -75,8 +57,15 @@ export default function ProductCard({ product }: PropsType) {
       </CardContent>
       <CardActions>
         <LoadingButton
-          loading={loading}
-          onClick={() => handleAddItem(product.id)}
+          loading={status.includes("pending" + product.id)}
+          onClick={async () => {
+            try {
+              await dispatch(addCartItemAsync({ productId: product.id }));
+              toast.success("Item added to cart!");
+            } catch (error) {
+              toast.error("Failed to add item to cart.");
+            }
+          }}
           size="small"
         >
           Add to Cart

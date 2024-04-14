@@ -19,6 +19,7 @@ import {
 import ProductSearch from "./ProductSearch";
 import RadioButtonGroup from "../../app/components/RadioButtonGroup";
 import CheckboxButtons from "../../app/components/CheckboxButtons";
+import AppPagination from "../../app/components/AppPagination";
 
 const sortOptions = [
   { value: "name", label: "Alphabetical" },
@@ -36,6 +37,7 @@ export default function Catalog() {
     brands,
     types,
     productParams,
+    metaData,
   } = useAppSelector((state) => state.catalog);
 
   useEffect(() => {
@@ -50,11 +52,11 @@ export default function Catalog() {
     }
   }, [filtersLoaded, dispatch]);
 
-  if (status.includes("pending"))
+  if (status.includes("pending") || !metaData)
     return <LoadingComponent message="Loading products..." />;
 
   return (
-    <Grid container spacing={4}>
+    <Grid container columnSpacing={4}>
       <Grid item xs={3}>
         <Paper sx={{ mb: 2 }}>
           <ProductSearch />
@@ -98,15 +100,12 @@ export default function Catalog() {
 
       <Grid item xs={3} />
       <Grid item xs={9}>
-        <Box
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-          sx={{ mt: -5 }}
-        >
-          <Typography>Displaying 1-6 of 20 items</Typography>
-          <Pagination color="secondary" size="large" count={10} page={2} />
-        </Box>
+        <AppPagination
+          metaData={metaData}
+          onPageChange={(page: number) =>
+            dispatch(setProductParams({ pageNumber: page }))
+          }
+        />
       </Grid>
     </Grid>
   );

@@ -20,6 +20,7 @@ import {
 } from "@mui/material";
 import ProductSearch from "./ProductSearch";
 import RadioButtonGroup from "../../app/components/RadioButtonGroup";
+import CheckboxButtons from "../../app/components/CheckboxButtons";
 
 const sortOptions = [
   { value: "name", label: "Alphabetical" },
@@ -72,26 +73,25 @@ export default function Catalog() {
 
         <Paper sx={{ mb: 2, p: 2 }}>
           <FormGroup>
-            {brands.map((brand) => (
-              <FormControlLabel
-                key={brand}
-                control={<Checkbox />}
-                label={brand}
-              />
-            ))}
+            <CheckboxButtons
+              items={brands}
+              checked={productParams.brands}
+              onChange={(items: string[]) =>
+                dispatch(setProductParams({ brands: items }))
+              }
+            />
           </FormGroup>
         </Paper>
 
         <Paper sx={{ mb: 2, p: 2 }}>
-          <FormGroup>
-            {types.map((brand) => (
-              <FormControlLabel
-                key={brand}
-                control={<Checkbox />}
-                label={brand}
-              />
-            ))}
-          </FormGroup>
+          {" "}
+          <CheckboxButtons
+            items={types}
+            checked={productParams.types}
+            onChange={(items: string[]) =>
+              dispatch(setProductParams({ types: items }))
+            }
+          />
         </Paper>
       </Grid>
       <Grid item xs={9}>

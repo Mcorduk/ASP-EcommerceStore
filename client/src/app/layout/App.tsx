@@ -38,6 +38,13 @@ function App() {
   const theme = createTheme({
     palette: {
       mode: paletteType,
+      primary: {
+        main: "#FFCAC8",
+      },
+      secondary: {
+        main: "#C0EEE4",
+      },
+      ...(darkMode ? { dark: "#FF9E9E" } : { light: "#F8F988" }),
     },
   });
 

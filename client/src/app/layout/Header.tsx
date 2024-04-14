@@ -12,6 +12,8 @@ import { NavLink } from "react-router-dom";
 import { ShoppingCart } from "@mui/icons-material";
 import { useAppSelector } from "../store/configureStore";
 
+import logo from "../../../public/tab.png";
+
 const midLinks = [
   { title: "Home", path: "/" },
   { title: "Catalog", path: "/catalog" },
@@ -53,15 +55,16 @@ export default function Header({ toggleDarkMode }: PropsType) {
         }}
       >
         <Box display="flex" alignItems="center">
+          <img src={logo} alt="logo" height="50" />{" "}
           <Link
             variant="h6"
             component={NavLink}
             to="/"
             sx={{ color: "inherit", ml: 2 }}
           >
-            Ecommerce Store
+            {/* Adjust the height as needed */}
+            Oni's PlushPlush
           </Link>
-
           <IconButton aria-label="toggle dark mode" onClick={toggleDarkMode}>
             <Brightness4Icon />
           </IconButton>

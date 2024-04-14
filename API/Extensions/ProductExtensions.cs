@@ -28,11 +28,11 @@ namespace API.Extensions
 
             var sanitizedSearchTerm = searchTerm.Trim().ToLower();
 
-            query = query.Where(p => p.Name.Contains(sanitizedSearchTerm));
+            query = query.Where(p => p.Name.ToLower().Contains(sanitizedSearchTerm));
 
             return query;
         }
-
+        
         public static IQueryable<Product> Filter(this IQueryable<Product> query, string brands, string types)
         {
             var brandList = new List<string>();

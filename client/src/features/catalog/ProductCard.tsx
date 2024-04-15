@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Button,
   Card,
   CardActions,
@@ -27,14 +26,9 @@ export default function ProductCard({ product }: PropsType) {
   return (
     <Card>
       <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: "secondary.main" }}>
-            {product.name.charAt(0).toUpperCase()}
-          </Avatar>
-        }
         title={product.name}
         titleTypographyProps={{
-          sx: { fontWeight: "bold", color: "primary.main" },
+          sx: { fontWeight: "light", color: "secondary.dark" },
         }}
       />
 
@@ -42,7 +36,7 @@ export default function ProductCard({ product }: PropsType) {
         sx={{
           height: 140,
           backgroundSize: "contain",
-          bgcolor: "primary.light",
+          bgcolor: "secondary.white",
         }}
         image={product.pictureUrl}
         title={product.name}
@@ -57,6 +51,7 @@ export default function ProductCard({ product }: PropsType) {
       </CardContent>
       <CardActions>
         <LoadingButton
+          sx={{ color: "secondary.dark" }}
           loading={status.includes("pending" + product.id)}
           onClick={async () => {
             try {
@@ -70,7 +65,12 @@ export default function ProductCard({ product }: PropsType) {
         >
           Add to Cart
         </LoadingButton>
-        <Button component={Link} to={`/catalog/${product.id}`} size="small">
+        <Button
+          component={Link}
+          to={`/catalog/${product.id}`}
+          size="small"
+          sx={{ color: "secondary.dark" }}
+        >
           {" "}
           View{" "}
         </Button>
@@ -78,5 +78,3 @@ export default function ProductCard({ product }: PropsType) {
     </Card>
   );
 }
-
-

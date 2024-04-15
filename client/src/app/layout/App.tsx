@@ -14,6 +14,9 @@ import agent from "../api/agent";
 import LoadingComponent from "./LoadingComponent";
 import { useAppDispatch } from "../store/configureStore";
 import { setCart } from "../../features/cart/cartSlice";
+// import PlusJakartaSans from "/font/Plus_Jakarta_Sans/PlusJakartaSans-VariableFont_wght.ttf";
+// import PlusJakartaSansBold from "/font/Plus_Jakarta_Sans/static/PlusJakartaSans-Bold.ttf";
+import PlusJakartaSansLight from "/font/Plus_Jakarta_Sans/static/PlusJakartaSans-Light.ttf";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -36,13 +39,19 @@ function App() {
 
   const paletteType = darkMode ? "dark" : "light";
   const theme = createTheme({
+    typography: {
+      fontFamily: [PlusJakartaSansLight].join(","),
+    },
     palette: {
       mode: paletteType,
+      background: {
+        default: "#FFEEED",
+      },
       primary: {
         main: "#FFCAC8",
       },
       secondary: {
-        main: "#C0EEE4",
+        main: "#50342B",
       },
       ...(darkMode ? { dark: "#FF9E9E" } : { light: "#F8F988" }),
     },

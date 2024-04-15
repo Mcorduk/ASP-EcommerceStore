@@ -177,6 +177,76 @@ namespace API.Data
                     Type = "Plush",
                     QuantityInStock = 100
                 },
+                new Product
+                {
+                    Name = "Sanrio Pompompurin Keychain",
+                    Description = "A cute Pompompurin keychain from Sanrio.",
+                    Price = 600,
+                    PictureUrl = "/images/products/keychain-pompompurin.png",
+                    Brand = "Sanrio",
+                    Type = "Keychain",
+                    QuantityInStock = 100
+                },
+                new Product
+                {
+                    Name = "Aurora Rainbow Plush",
+                    Description = "A colorful and cuddly rainbow plush from Aurora.",
+                    Price = 2000,
+                    PictureUrl = "/images/products/plush-rainbow.png",
+                    Brand = "Aurora",
+                    Type = "Plush",
+                    QuantityInStock = 100
+                },
+                new Product
+                {
+                    Name = "Aurora Strawberry Cow Plush",
+                    Description = "A cute and cuddly strawberry cow plush from Aurora.",
+                    Price = 2000,
+                    PictureUrl = "/images/products/plush-strawberrycow.png",
+                    Brand = "Aurora",
+                    Type = "Plush",
+                    QuantityInStock = 100
+                },
+                new Product
+                {
+                    Name = "Aurora Axolotl Plush",
+                    Description = "A unique and cuddly axolotl plush from Aurora.",
+                    Price = 2000,
+                    PictureUrl = "/images/products/plush-axolotl.png",
+                    Brand = "Aurora",
+                    Type = "Plush",
+                    QuantityInStock = 100
+                },
+                new Product
+                {
+                    Name = "Clefairy Squishmallow",
+                    Description = "A squishy and cute Clefairy from Squishmallow.",
+                    Price = 2500,
+                    PictureUrl = "/images/products/plush-clefairy.png",
+                    Brand = "Squishmallow",
+                    Type = "Plush",
+                    QuantityInStock = 100
+                },
+                new Product
+                {
+                    Name = "Jellycat Bear Keychain",
+                    Description = "A charming bear keychain from Jellycat.",
+                    Price = 600,
+                    PictureUrl = "/images/products/keychain-bear.png",
+                    Brand = "Jellycat",
+                    Type = "Keychain",
+                    QuantityInStock = 100
+                },
+                new Product
+                {
+                    Name = "Pusheen Cushion",
+                    Description = "A comfortable and cute Pusheen cushion.",
+                    Price = 1200,
+                    PictureUrl = "/images/products/cushion-pusheen.png",
+                    Brand = "Pusheen",
+                    Type = "Cushion",
+                    QuantityInStock = 100
+                },
 
             };
 

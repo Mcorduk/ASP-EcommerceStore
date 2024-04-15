@@ -127,7 +127,57 @@ namespace API.Data
                     Brand = "Sanrio",
                     Type = "Plush",
                     QuantityInStock = 100
+                },new Product
+                {
+                    Name = "Rilakkuma Plush",
+                    Description = "A soft and cuddly Rilakkuma plush.",
+                    Price = 2000,
+                    PictureUrl = "/images/products/plush-rilakkuma.png",
+                    Brand = "Rilakkuma",
+                    Type = "Plush",
+                    QuantityInStock = 100
                 },
+                new Product
+                {
+                    Name = "Rilakkuma Streetwear Plush Keychain",
+                    Description = "A stylish Rilakkuma streetwear plush keychain.",
+                    Price = 600,
+                    PictureUrl = "/images/products/keychain-rilakkuma.png",
+                    Brand = "Rilakkuma",
+                    Type = "Keychain",
+                    QuantityInStock = 100
+                },
+                new Product
+                {
+                    Name = "Pusheen Backpack",
+                    Description = "A practical and cute Pusheen backpack.",
+                    Price = 2500,
+                    PictureUrl = "/images/products/backpack-pusheen.png",
+                    Brand = "Pusheen",
+                    Type = "Backpack",
+                    QuantityInStock = 100
+                },
+                new Product
+                {
+                    Name = "Pusheen Squishy Keychain",
+                    Description = "A squishy and cute Pusheen keychain.",
+                    Price = 600,
+                    PictureUrl = "/images/products/keychain-pusheen.png",
+                    Brand = "Pusheen",
+                    Type = "Keychain",
+                    QuantityInStock = 100
+                },
+                new Product
+                {
+                    Name = "Rilakkuma Cushion Plush",
+                    Description = "A soft and cuddly Rilakkuma cushion plush.",
+                    Price = 2200,
+                    PictureUrl = "/images/products/cushion-rilakkuma.png",
+                    Brand = "Rilakkuma",
+                    Type = "Plush",
+                    QuantityInStock = 100
+                },
+
             };
 
             foreach (var product in products)
@@ -138,4 +188,4 @@ namespace API.Data
             context.SaveChanges();
         }
     }
-}            <img src={logo} alt="logo" height="50" />{" "}
+}

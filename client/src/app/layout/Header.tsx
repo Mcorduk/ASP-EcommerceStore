@@ -12,7 +12,7 @@ import { NavLink } from "react-router-dom";
 import { ShoppingCart } from "@mui/icons-material";
 import { useAppSelector } from "../store/configureStore";
 
-import logo from "../../../public/tab.png";
+import logo from "/tab.png";
 
 const midLinks = [
   { title: "Home", path: "/" },
@@ -63,7 +63,7 @@ export default function Header({ toggleDarkMode }: PropsType) {
             sx={{ color: "inherit", ml: 2 }}
           >
             {/* Adjust the height as needed */}
-            Oni's PlushPlush
+            PlushPlush
           </Link>
           <IconButton aria-label="toggle dark mode" onClick={toggleDarkMode}>
             <Brightness4Icon />

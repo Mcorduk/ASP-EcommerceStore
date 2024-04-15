@@ -12,7 +12,7 @@ import { NavLink } from "react-router-dom";
 import { ShoppingCart } from "@mui/icons-material";
 import { useAppSelector } from "../store/configureStore";
 
-import logo from "/tab.png";
+import logo from "/logo.png";
 
 const midLinks = [
   { title: "Home", path: "/" },
@@ -52,10 +52,16 @@ export default function Header({ toggleDarkMode }: PropsType) {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
+          height: 85,
         }}
       >
         <Box display="flex" alignItems="center">
-          <img src={logo} alt="logo" height="50" />{" "}
+          <img
+            src={logo}
+            alt="logo"
+            height="150"
+            style={{ zIndex: 99, marginTop: 20 }}
+          />{" "}
           <Link
             variant="h6"
             component={NavLink}

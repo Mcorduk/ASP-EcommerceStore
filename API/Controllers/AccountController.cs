@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.DTOs;
 using API.Entities;
+using API.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,14 +12,16 @@ namespace API.Controllers
 {
     public class AccountController : BaseApiController
     {
-        private readonly UserManager<User> _userManager;
-        public AccountController(UserManager<User> userManager)
+        public UserManager<User> _userManager;
+        public TokenService _tokenService { get; }
+        public AccountController(UserManager<User> userManager, TokenService tokenService)
         {
+            _tokenService = tokenService;
             _userManager = userManager;
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<User>> Login(LoginDTO loginDto)
+        public async Task<ActionResult<UserDTO>> Login(LoginDTO loginDto)
         {
             var user = await _userManager.FindByEmailAsync(loginDto.Email);
 
@@ -28,7 +31,11 @@ namespace API.Controllers
 
             if (!password) return Unauthorized("Invalid password");
 
-            return user;
+            return new UserDTO
+            {
+                Email = user.Email,
+                Token = await _tokenService.GenerateToken(user)
+            };
         }
 
         [HttpPost("register")]
@@ -49,8 +56,5 @@ namespace API.Controllers
 
             return StatusCode(201);
         }
-
-        
-        
     }
 }

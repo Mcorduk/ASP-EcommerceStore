@@ -19,7 +19,6 @@ axios.interceptors.response.use(
         response.data,
         JSON.parse(pagination)
       );
-      console.log(response);
       return response;
     }
     return response;
@@ -89,10 +88,19 @@ const Cart = {
     requests.del(`cart?productId=${productId}&quantity=${quantity}`),
 };
 
+const Account = {
+  current: () => requests.get("account/currentuser"),
+  login: (credentials: { email: string; password: string }) =>
+    requests.post("account/login", credentials),
+  register: (credentials: { email: string; password: string }) =>
+    requests.post("account/register", credentials),
+};
+
 const agent = {
   Catalog,
   TestErrors,
   Cart,
+  Account,
 };
 
 export default agent;

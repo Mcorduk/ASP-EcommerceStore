@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using API.DTOs;
 using API.Entities;
 using API.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -56,5 +58,20 @@ namespace API.Controllers
 
             return StatusCode(201);
         }
+
+        [Authorize]
+        [HttpGet("currentUser")]
+        public async Task<ActionResult<UserDTO>> GetCurrentUser()
+        {
+            var user = await _userManager.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
+
+            return new UserDTO
+            {
+                Email = user.Email,
+                Token = await _tokenService.GenerateToken(user)
+            };
+        }
+
+        
     }
 }

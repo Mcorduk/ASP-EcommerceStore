@@ -18,7 +18,6 @@ namespace API.Services
         public TokenService(UserManager<User> userManager, IConfiguration config)
         {
             _userManager = userManager;
-            _userManager = userManager;
             _config = config;
         }
 
@@ -48,19 +47,6 @@ namespace API.Services
             );
 
             return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-        }
-
-        [Authorize]
-        [HttpGet("currentUser")]
-        public async Task<ActionResult<UserDTO>> GetCurrentUser()
-        {
-            var user = await _userManager.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
-
-            return new UserDTO
-            {
-                Email = user.Email,
-                Token = await GenerateToken(user)
-            };
         }
     }
 }
